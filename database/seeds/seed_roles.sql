@@ -1,0 +1,1 @@
+-- Seed default roles (ADMIN, CUSTOMER).

@@ -1,0 +1,1 @@
+-- Enable required Postgres extensions (uuid-ossp/pgcrypto).

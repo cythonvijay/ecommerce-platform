@@ -1,0 +1,20 @@
+export const ENDPOINTS = {
+  auth: {
+    register: "/auth/register",
+    login: "/auth/login",
+    refresh: "/auth/refresh",
+    logout: "/auth/logout",
+    profile: "/auth/profile",
+    changePassword: "/auth/change-password",
+  },
+  categories: "/categories",
+  products: "/products",
+  inventory: "/inventory",
+  addresses: "/addresses",
+  cart: "/cart",
+  wishlist: "/wishlist",
+  orders: "/orders",
+  reviews: "/reviews",
+  users: "/users",
+  admin: { dashboard: "/admin/dashboard" },
+};

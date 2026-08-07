@@ -1,0 +1,38 @@
+# --- Python / backend ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+*.log
+backend/logs/*
+!backend/logs/.gitkeep
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Node / frontend ---
+node_modules/
+dist/
+build/
+.vite/
+frontend/.env
+frontend/.env.local
+
+# --- Env / secrets ---
+.env
+.env.*
+!*.env.example
+
+# --- Infra / DevOps (future) ---
+*.tfstate
+*.tfstate.*
+.terraform/
+kubeconfig
+*.pem
+
+# --- OS / editor ---
+.DS_Store
+.vscode/
+.idea/
