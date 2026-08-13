@@ -12,8 +12,8 @@ pipeline {
         stage('Verify') {
             steps {
                 echo 'Jenkins successfully checked out the e-commerce project!'
-                bat 'git --version'
-                bat 'docker --version'
+                sh 'git --version'
+                sh 'docker --version'
             }
         }
     }
