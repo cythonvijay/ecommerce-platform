@@ -22,6 +22,13 @@ pipeline {
                 sh 'docker info'
             }
         }
+
+        stage('Build Docker Images') {
+            steps {
+                sh 'docker build -t cythonvijay/ecommerce-backend:v2 ./backend'
+                sh 'docker build -t cythonvijay/ecommerce-frontend:v2 ./frontend'
+            }
+        }
     }
 
     post {
