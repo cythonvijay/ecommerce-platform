@@ -22,7 +22,11 @@ pipeline {
                 sh 'docker info'
             }
         }
-
+stage('Test Python Package Network') {
+    steps {
+        sh 'docker run --rm python:3.12-slim python -m pip index versions idna'
+    }
+}
         stage('Build Docker Images') {
             steps {
                 sh 'docker build -t cythonvijay/ecommerce-backend:v2 ./backend'
