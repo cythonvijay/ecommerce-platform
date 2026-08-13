@@ -16,15 +16,21 @@ pipeline {
                 sh 'docker --version'
             }
         }
+
+        stage('Docker Connection') {
+            steps {
+                sh 'docker info'
+            }
+        }
     }
 
     post {
         success {
-            echo '✅ Jenkins pipeline completed successfully!'
+            echo 'Jenkins pipeline completed successfully!'
         }
 
         failure {
-            echo '❌ Jenkins pipeline failed.'
+            echo 'Jenkins pipeline failed.'
         }
     }
 }
