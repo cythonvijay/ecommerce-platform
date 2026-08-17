@@ -46,6 +46,25 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to Kubernetes') {
+    steps {
+        sh '''
+            kubectl apply -f k8s/namespace.yaml
+            kubectl apply -f k8s/postgres.yaml
+            kubectl apply -f k8s/backend.yaml
+            kubectl apply -f k8s/frontend.yaml
+        '''
+    }
+}
+
+stage('Verify Kubernetes Deployment') {
+    steps {
+        sh '''
+            kubectl get pods -n ecommerce
+            kubectl get services -n ecommerce
+        '''
+    }
+}
     }
 
     post {
