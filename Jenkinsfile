@@ -3,12 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Verify') {
             steps {
                 echo 'Jenkins successfully checked out the e-commerce project!'
@@ -22,15 +16,41 @@ pipeline {
                 sh 'docker info'
             }
         }
-stage('Test Python Package Network') {
-    steps {
-        sh 'docker run --rm python:3.12-slim python -m pip index versions idna'
-    }
-}
+
+        stage('Test Python Package Network') {
+            steps {
+                sh '''
+                    python3 --version
+                    pip3 --version
+                '''
+            }
+        }
+
         stage('Build Docker Images') {
             steps {
-                sh 'docker build -t cythonvijay/ecommerce-backend:v2 ./backend'
-                sh 'docker build -t cythonvijay/ecommerce-frontend:v2 ./frontend'
+                sh '''
+                    docker build -t cythonvijay/ecommerce-backend:v2 ./backend
+                    docker build -t cythonvijay/ecommerce-frontend:v2 ./frontend
+                '''
+            }
+        }
+
+        stage('Push Images to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USERNAME',
+                    passwordVariable: 'DOCKER_PASSWORD'
+                )]) {
+                    sh '''
+                        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+                        docker push cythonvijay/ecommerce-backend:v2
+                        docker push cythonvijay/ecommerce-frontend:v2
+
+                        docker logout
+                    '''
+                }
             }
         }
     }
